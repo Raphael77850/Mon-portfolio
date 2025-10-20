@@ -30,8 +30,8 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-neutral-light mb-4">
-                Développeur Web
-                <span className="block text-gradient mt-2">Junior Passionné</span>
+                Raphaël Streiff
+                <span className="block text-gradient mt-2">Développeur Web Passionné</span>
               </h1>
             </motion.div>
 

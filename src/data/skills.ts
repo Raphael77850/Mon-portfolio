@@ -91,14 +91,6 @@ export const skills: Skill[] = [
 
   // Database
   {
-    id: 'mongodb',
-    name: 'MongoDB',
-    category: 'database',
-    icon: 'SiMongodb',
-    level: 75,
-    order: 11,
-  },
-  {
     id: 'mysql',
     name: 'MySQL',
     category: 'database',
@@ -141,10 +133,10 @@ export const skills: Skill[] = [
     order: 16,
   },
   {
-    id: 'figma',
-    name: 'Figma',
+    id: 'cursor',
+    name: 'Cursor',
     category: 'tools',
-    icon: 'FaFigma',
+    icon: 'FaCursor',
     level: 75,
     order: 17,
   },

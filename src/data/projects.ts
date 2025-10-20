@@ -11,7 +11,8 @@ export interface Project {
   stack: string[];
   image: string;
   githubUrl: string;
-  demoUrl?: string;
+  demoUrl?: string;      // Pour les liens externes (La Bringuerie)
+  demoVideo?: string;    // Pour les vidéos locales (Wildify, Veever)
   featured: boolean;
   order: number;
 }
@@ -25,7 +26,7 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'Express.js', 'MySQL', 'Spotify API', 'Docker', 'Traefik'],
     image: '/projects/wildify.jpg',
     githubUrl: 'https://github.com/votre-username/wildify',
-    demoUrl: '',
+    demoVideo: 'Wildify_démo.mp4',
     featured: true,
     order: 1,
   },
@@ -33,11 +34,11 @@ export const projects: Project[] = [
     id: 'projet-2',
     title: 'Veever',
     description: 'Projet de formation a la Wild Code School, V1 d\'une plateforme de Recommandations Touristiques',
-    longDescription: 'V1 d\'une application web fullstack permettant aux utilisateurs de découvrir des hébergements et restaurants personnalisés via un questionnaire interactif. Le projet intègre un système d\'authentification JWT, un dashboard administrateur complet et une gestion dynamique des établissements avec filtres et géolocalisation.',
+    longDescription: 'Prototype d\'une application web fullstack permettant aux utilisateurs de découvrir des hébergements et restaurants personnalisés via un questionnaire interactif. Le projet intègre un système d\'authentification JWT, un dashboard administrateur complet et une gestion dynamique des établissements avec filtres et géolocalisation.',
     stack: ['React', 'TypeScript', 'Material-UI', 'Express.js', 'MySQL', 'Node.js', 'Docker', 'Traefik'],
     image: '/projects/veever.jpg',
     githubUrl: 'https://github.com/Raphael77850/Veever_wild_fixes',
-    demoUrl: '',
+    demoVideo: '/Veever_démo.mp4',
     featured: true,
     order: 2,
   },
