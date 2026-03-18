@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { FaGithub, FaLinkedin, FaEnvelope, FaHeart } from 'react-icons/fa';
+import Link from "next/link";
+import { FaEnvelope, FaGithub, FaHeart, FaLinkedin } from "react-icons/fa";
 
 const socialLinks = [
   {
-    name: 'GitHub',
-    href: 'https://github.com/Raphael77850',
+    name: "GitHub",
+    href: "https://github.com/Raphael77850",
     icon: FaGithub,
   },
   {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/rapha%C3%ABl-streiff-3019a5309/',
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/rapha%C3%ABl-streiff-3019a5309/",
     icon: FaLinkedin,
   },
   {
-    name: 'Email',
-    href: 'mailto:raphael.streiff93@gmail.com',
+    name: "Email",
+    href: "mailto:raphael.streiff93@gmail.com",
     icon: FaEnvelope,
   },
 ];
 
 const footerLinks = [
-  { name: 'Mentions légales', href: '/legal' },
-  { name: 'Politique de confidentialité', href: '/privacy' },
+  { name: "Mentions légales", href: "/legal" },
+  { name: "Politique de confidentialité", href: "/privacy" },
 ];
 
 export default function Footer() {
@@ -39,8 +39,9 @@ export default function Footer() {
               Portfolio
             </h3>
             <p className="text-neutral text-sm leading-relaxed">
-              Développeur web junior passionné par la création d&apos;interfaces modernes et intuitives. 
-              Toujours en quête d&apos;apprentissage et de nouveaux défis.
+              Développeur web junior passionné par la création d&apos;interfaces
+              modernes et intuitives. Toujours en quête d&apos;apprentissage et
+              de nouveaux défis.
             </p>
           </div>
 
@@ -50,27 +51,35 @@ export default function Footer() {
               Navigation
             </h4>
             <ul className="space-y-2">
-              {['Accueil', 'Projets', 'Compétences', 'À propos', 'Contact'].map((item) => (
-                <li key={item}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const href = `#${item.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-')}`;
-                      const element = document.querySelector(
-                        item === 'Accueil' ? '#hero' : 
-                        item === 'À propos' ? '#about' :
-                        href
-                      );
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                    className="text-neutral hover:text-accent-blue transition-colors duration-300 text-sm"
-                  >
-                    {item}
-                  </button>
-                </li>
-              ))}
+              {["Accueil", "Projets", "Compétences", "À propos", "Contact"].map(
+                (item) => (
+                  <li key={item}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const href = `#${item
+                          .toLowerCase()
+                          .normalize("NFD")
+                          .replace(/[\u0300-\u036f]/g, "")
+                          .replace(/\s+/g, "-")}`;
+                        const element = document.querySelector(
+                          item === "Accueil"
+                            ? "#hero"
+                            : item === "À propos"
+                              ? "#about"
+                              : href,
+                        );
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }}
+                      className="text-neutral hover:text-accent-blue transition-colors duration-300 text-sm"
+                    >
+                      {item}
+                    </button>
+                  </li>
+                ),
+              )}
             </ul>
           </div>
 

@@ -1,25 +1,30 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { FaArrowDown, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import ProjectCard from '@/components/ProjectCard';
-import SkillCard from '@/components/SkillCard';
-import ContactForm from '@/components/ContactForm';
-import { getProjects } from '@/data/projects';
-import { getSkillsGroupedByCategory, categoryLabels, skills } from '@/data/skills';
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { FaArrowDown, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import ContactForm from "@/components/ContactForm";
+import ProjectCard from "@/components/ProjectCard";
+import SkillCard from "@/components/SkillCard";
+import { getProjects } from "@/data/projects";
+import { skills } from "@/data/skills";
 
 export default function Home() {
   const projects = getProjects();
-  const skillsGrouped = getSkillsGroupedByCategory();
 
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
+      <section
+        id="hero"
+        className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden"
+      >
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-green/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+          <div
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-green/10 rounded-full blur-3xl animate-float"
+            style={{ animationDelay: "1s" }}
+          />
         </div>
 
         <div className="container-custom relative z-10">
@@ -31,7 +36,9 @@ export default function Home() {
             >
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-neutral-light mb-4">
                 Raphaël Streiff
-                <span className="block text-gradient mt-2">Développeur Web Passionné</span>
+                <span className="block text-gradient mt-2">
+                  Développeur Web Passionné
+                </span>
               </h1>
             </motion.div>
 
@@ -41,7 +48,8 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-xl md:text-2xl text-neutral max-w-2xl mx-auto leading-relaxed"
             >
-              Je crée des expériences web modernes et intuitives avec un code propre et performant.
+              Je crée des expériences web modernes et intuitives avec un code
+              propre et performant.
             </motion.p>
 
             <motion.div
@@ -53,8 +61,8 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => {
-                  const element = document.querySelector('#projects');
-                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                  const element = document.querySelector("#projects");
+                  if (element) element.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="bg-gradient-to-r from-accent-blue to-accent-green hover:opacity-90 text-primary font-medium px-8 py-4 rounded-lg transition-all duration-300 hover-lift"
               >
@@ -63,8 +71,8 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => {
-                  const element = document.querySelector('#contact');
-                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                  const element = document.querySelector("#contact");
+                  if (element) element.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="glass-effect text-neutral-light font-medium px-8 py-4 rounded-lg transition-all duration-300 hover:border-accent-blue"
               >
@@ -116,8 +124,8 @@ export default function Home() {
           <button
             type="button"
             onClick={() => {
-              const element = document.querySelector('#projects');
-              if (element) element.scrollIntoView({ behavior: 'smooth' });
+              const element = document.querySelector("#projects");
+              if (element) element.scrollIntoView({ behavior: "smooth" });
             }}
             className="text-neutral hover:text-accent-blue transition-colors animate-bounce"
             aria-label="Scroll down"
@@ -141,7 +149,8 @@ export default function Home() {
               Mes <span className="text-gradient">Projets</span>
             </h2>
             <p className="text-neutral text-lg max-w-2xl mx-auto">
-              Découvrez une sélection de mes réalisations récentes, de la conception au déploiement.
+              Découvrez une sélection de mes réalisations récentes, de la
+              conception au déploiement.
             </p>
           </motion.div>
 
@@ -167,7 +176,8 @@ export default function Home() {
               Compétences
             </h2>
             <p className="text-neutral text-lg max-w-2xl mx-auto">
-              Un ensemble de technologies modernes que je maîtrise et utilise au quotidien
+              Un ensemble de technologies modernes que je maîtrise et utilise au
+              quotidien
             </p>
           </motion.div>
 
@@ -175,15 +185,21 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
             {/* Skills principales - GRANDES cartes */}
             <SkillCard skill={skills[4]} index={0} size="large" /> {/* React */}
-            <SkillCard skill={skills[5]} index={1} size="large" /> {/* Next.js */}
-            
+            <SkillCard skill={skills[5]} index={1} size="large" />{" "}
+            {/* Next.js */}
             {/* Skills importantes - MOYENNES cartes */}
-            <SkillCard skill={skills[3]} index={2} size="medium" /> {/* TypeScript */}
-            <SkillCard skill={skills[6]} index={3} size="medium" /> {/* Tailwind */}
-            
+            <SkillCard skill={skills[3]} index={2} size="medium" />{" "}
+            {/* TypeScript */}
+            <SkillCard skill={skills[6]} index={3} size="medium" />{" "}
+            {/* Tailwind */}
             {/* Autres skills - PETITES cartes */}
             {skills.slice(7).map((skill, idx) => (
-              <SkillCard key={skill.id} skill={skill} index={idx + 4} size="small" />
+              <SkillCard
+                key={skill.id}
+                skill={skill}
+                index={idx + 4}
+                size="small"
+              />
             ))}
           </div>
         </div>
@@ -213,21 +229,25 @@ export default function Home() {
               className="glass-effect rounded-lg p-8 md:p-12 space-y-6"
             >
               <p className="text-neutral text-lg leading-relaxed">
-                Bonjour ! Je suis un développeur web junior passionné par la création d&apos;interfaces 
-                modernes et intuitives. Diplômé d&apos;une formation intensive en développement web, 
-                je combine créativité et rigueur technique pour transformer des idées en expériences 
-                digitales mémorables.
+                Bonjour ! Je suis un développeur web junior passionné par la
+                création d&apos;interfaces modernes et intuitives. Diplômé
+                d&apos;une formation intensive en développement web, je combine
+                créativité et rigueur technique pour transformer des idées en
+                expériences digitales mémorables.
               </p>
 
               <p className="text-neutral text-lg leading-relaxed">
-                Mon parcours m&apos;a permis de maîtriser les technologies front-end (React, Next.js, 
-                Tailwind CSS) et back-end (Node.js, bases de données). Je suis constamment en quête 
-                d&apos;apprentissage et de nouveaux défis pour perfectionner mes compétences.
+                Mon parcours m&apos;a permis de maîtriser les technologies
+                front-end (React, Next.js, Tailwind CSS) et back-end (Node.js,
+                bases de données). Je suis constamment en quête
+                d&apos;apprentissage et de nouveaux défis pour perfectionner mes
+                compétences.
               </p>
 
               <p className="text-neutral text-lg leading-relaxed">
-                Au-delà du code, je privilégie une approche centrée sur l&apos;utilisateur avec un 
-                focus particulier sur l&apos;accessibilité, les performances et le SEO. Mon objectif ? 
+                Au-delà du code, je privilégie une approche centrée sur
+                l&apos;utilisateur avec un focus particulier sur
+                l&apos;accessibilité, les performances et le SEO. Mon objectif ?
                 Créer des solutions web qui font la différence.
               </p>
 
@@ -235,8 +255,8 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => {
-                    const element = document.querySelector('#contact');
-                    if (element) element.scrollIntoView({ behavior: 'smooth' });
+                    const element = document.querySelector("#contact");
+                    if (element) element.scrollIntoView({ behavior: "smooth" });
                   }}
                   className="bg-gradient-to-r from-accent-blue to-accent-green hover:opacity-90 text-primary font-medium px-8 py-4 rounded-lg transition-all duration-300 hover-lift"
                 >
@@ -262,8 +282,8 @@ export default function Home() {
               Me <span className="text-gradient">Contacter</span>
             </h2>
             <p className="text-neutral text-lg max-w-2xl mx-auto">
-              Un projet en tête ? Une question ? N&apos;hésitez pas à me contacter, 
-              je serai ravi d&apos;échanger avec vous.
+              Un projet en tête ? Une question ? N&apos;hésitez pas à me
+              contacter, je serai ravi d&apos;échanger avec vous.
             </p>
           </motion.div>
 

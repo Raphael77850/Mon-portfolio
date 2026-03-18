@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const navItems = [
-  { name: 'Accueil', href: '#hero' },
-  { name: 'Projets', href: '#projects' },
-  { name: 'Compétences', href: '#skills' },
-  { name: 'À propos', href: '#about' },
-  { name: 'Contact', href: '#contact' },
+  { name: "Accueil", href: "#hero" },
+  { name: "Projets", href: "#projects" },
+  { name: "Compétences", href: "#skills" },
+  { name: "À propos", href: "#about" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Header() {
@@ -22,14 +22,14 @@ export default function Header() {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setIsMobileMenuOpen(false);
     }
   };
@@ -40,15 +40,16 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'glass-effect shadow-lg'
-          : 'bg-transparent'
+        isScrolled ? "glass-effect shadow-lg" : "bg-transparent"
       }`}
     >
       <nav className="container-custom px-6 md:px-12 lg:px-24 py-4 md:py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-2xl md:text-3xl font-heading font-bold text-gradient hover:opacity-80 transition-opacity">
+          <Link
+            href="/"
+            className="text-2xl md:text-3xl font-heading font-bold text-gradient hover:opacity-80 transition-opacity"
+          >
             Portfolio
           </Link>
 
@@ -84,7 +85,7 @@ export default function Header() {
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden mt-6 pb-4"
           >

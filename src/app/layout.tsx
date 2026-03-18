@@ -7,8 +7,16 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
   title: "Portfolio | Raphaël Développeur Web Junior",
-  description: "Portfolio de développeur web junior. Découvrez mes projets, compétences et réalisations en React, Next.js et développement web moderne.",
-  keywords: ["développeur web", "portfolio", "React", "Next.js", "développeur junior", "web development"],
+  description:
+    "Portfolio de développeur web junior. Découvrez mes projets, compétences et réalisations en React, Next.js et développement web moderne.",
+  keywords: [
+    "développeur web",
+    "portfolio",
+    "React",
+    "Next.js",
+    "développeur junior",
+    "web development",
+  ],
   authors: [{ name: "Raphaël" }],
   metadataBase: new URL(siteUrl),
   alternates: {
@@ -16,7 +24,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Portfolio | Raphaël Développeur Web Junior",
-    description: "Développeur web passionné par la création d'expériences web modernes et intuitives.",
+    description:
+      "Développeur web passionné par la création d'expériences web modernes et intuitives.",
     url: siteUrl,
     siteName: "Portfolio Raphaël Streiff",
     type: "website",

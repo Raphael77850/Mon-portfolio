@@ -1,20 +1,24 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaPaperPlane } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { FaPaperPlane } from "react-icons/fa";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [statusMessage, setStatusMessage] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+  const [statusMessage, setStatusMessage] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -24,34 +28,39 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
-    setStatusMessage('');
+    setSubmitStatus("idle");
+    setStatusMessage("");
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Impossible d\'envoyer le message pour le moment.');
+        throw new Error(
+          result.message || "Impossible d'envoyer le message pour le moment.",
+        );
       }
 
-      setSubmitStatus('success');
-      setStatusMessage('Message envoyé avec succès. Je vous répondrai rapidement.');
-      setFormData({ name: '', email: '', message: '' });
+      setSubmitStatus("success");
+      setStatusMessage(
+        "Message envoyé avec succès. Je vous répondrai rapidement.",
+      );
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Erreur inconnue.';
-      setSubmitStatus('error');
+      const message =
+        error instanceof Error ? error.message : "Erreur inconnue.";
+      setSubmitStatus("error");
       setStatusMessage(message);
     } finally {
       setIsSubmitting(false);
       setTimeout(() => {
-        setSubmitStatus('idle');
-        setStatusMessage('');
+        setSubmitStatus("idle");
+        setStatusMessage("");
       }, 7000);
     }
   };
@@ -67,7 +76,10 @@ export default function ContactForm() {
     >
       {/* Nom */}
       <div>
-        <label htmlFor="name" className="block text-neutral-light font-medium mb-2">
+        <label
+          htmlFor="name"
+          className="block text-neutral-light font-medium mb-2"
+        >
           Nom complet
         </label>
         <input
@@ -84,7 +96,10 @@ export default function ContactForm() {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block text-neutral-light font-medium mb-2">
+        <label
+          htmlFor="email"
+          className="block text-neutral-light font-medium mb-2"
+        >
           Adresse email
         </label>
         <input
@@ -101,7 +116,10 @@ export default function ContactForm() {
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-neutral-light font-medium mb-2">
+        <label
+          htmlFor="message"
+          className="block text-neutral-light font-medium mb-2"
+        >
           Message
         </label>
         <textarea
@@ -133,7 +151,7 @@ export default function ContactForm() {
       </button>
 
       {/* Messages de statut */}
-      {submitStatus === 'success' && (
+      {submitStatus === "success" && (
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -143,7 +161,7 @@ export default function ContactForm() {
         </motion.p>
       )}
 
-      {submitStatus === 'error' && (
+      {submitStatus === "error" && (
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -155,8 +173,8 @@ export default function ContactForm() {
 
       {/* Mention RGPD */}
       <p className="text-neutral text-xs text-center">
-        En envoyant ce formulaire, vous acceptez que vos données soient utilisées pour vous recontacter. 
-        Consultez notre{' '}
+        En envoyant ce formulaire, vous acceptez que vos données soient
+        utilisées pour vous recontacter. Consultez notre{" "}
         <a href="/privacy" className="text-accent-blue hover:underline">
           politique de confidentialité
         </a>

@@ -1,29 +1,65 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Tilt from 'react-parallax-tilt';
-import * as Icons from 'react-icons/fa';
-import * as SimpleIcons from 'react-icons/si';
-import type { Skill } from '@/data/skills';
-import type { IconBaseProps } from 'react-icons';
+import { motion } from "framer-motion";
+import type { IconType } from "react-icons";
+import {
+  FaCss3Alt,
+  FaGitAlt,
+  FaGithub,
+  FaHtml5,
+  FaICursor,
+  FaJs,
+  FaNodeJs,
+  FaReact,
+} from "react-icons/fa";
+import {
+  SiExpress,
+  SiMysql,
+  SiNextdotjs,
+  SiPostgresql,
+  SiTailwindcss,
+  SiTypescript,
+  SiVscodium,
+} from "react-icons/si";
+import Tilt from "react-parallax-tilt";
+import type { Skill } from "@/data/skills";
+
+const iconMap: Record<string, IconType> = {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  SiTypescript,
+  FaReact,
+  SiNextdotjs,
+  SiTailwindcss,
+  FaNodeJs,
+  SiExpress,
+  SiMysql,
+  SiPostgresql,
+  FaGitAlt,
+  FaGithub,
+  SiVscodium,
+  FaICursor,
+};
 
 interface SkillCardProps {
   skill: Skill;
   index: number;
-  size?: 'small' | 'medium' | 'large'; // Pour Bento Grid
+  size?: "small" | "medium" | "large"; // Pour Bento Grid
 }
 
-export default function SkillCard({ skill, index, size = 'small' }: SkillCardProps) {
-  const IconComponent = (
-    (Icons as Record<string, React.ComponentType<IconBaseProps>>)[skill.icon] ||
-    (SimpleIcons as Record<string, React.ComponentType<IconBaseProps>>)[skill.icon]
-  ) as React.ComponentType<IconBaseProps> | undefined;
+export default function SkillCard({
+  skill,
+  index,
+  size = "small",
+}: SkillCardProps) {
+  const IconComponent = iconMap[skill.icon];
 
   // Tailles différentes selon l'importance
   const sizeClasses = {
-    small: 'col-span-1',
-    medium: 'md:col-span-2',
-    large: 'md:col-span-2 md:row-span-2',
+    small: "col-span-1",
+    medium: "md:col-span-2",
+    large: "md:col-span-2 md:row-span-2",
   };
 
   const iconSizes = {
@@ -64,14 +100,16 @@ export default function SkillCard({ skill, index, size = 'small' }: SkillCardPro
           )}
 
           {/* Nom de la compétence */}
-          <h3 className={`text-neutral-light font-medium text-center relative z-10 ${
-            size === 'large' ? 'text-xl' : 'text-base'
-          }`}>
+          <h3
+            className={`text-neutral-light font-medium text-center relative z-10 ${
+              size === "large" ? "text-xl" : "text-base"
+            }`}
+          >
             {skill.name}
           </h3>
 
           {/* Badge catégorie (optionnel pour grandes cartes) */}
-          {size === 'large' && (
+          {size === "large" && (
             <span className="px-3 py-1 bg-secondary-light rounded-full text-accent-blue text-xs font-medium relative z-10">
               {skill.category}
             </span>
