@@ -154,7 +154,7 @@ export const categoryLabels: Record<Skill['category'], string> = {
  * Fonctions utilitaires pour récupérer les compétences
  */
 export const getSkills = (): Skill[] => {
-  return skills.sort((a, b) => a.order - b.order);
+  return [...skills].sort((a, b) => a.order - b.order);
 };
 
 export const getSkillsByCategory = (category: Skill['category']): Skill[] => {

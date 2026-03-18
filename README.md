@@ -21,7 +21,7 @@ Un portfolio moderne, sobre et élégant conçu pour mettre en valeur vos projet
 - **Contact** : Formulaire de contact avec validation RGPD
 
 ### Technologies
-- ⚛️ **Next.js 15** - Framework React avec App Router
+- ⚛️ **Next.js 16** - Framework React avec App Router
 - 🎨 **Tailwind CSS** - Styling utilitaire et responsive
 - 🎬 **Framer Motion** - Animations performantes
 - 📦 **TypeScript** - Type-safety

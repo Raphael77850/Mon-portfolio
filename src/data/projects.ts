@@ -25,9 +25,8 @@ export const projects: Project[] = [
     longDescription: 'Application web fullstack permettant aux utilisateurs de découvrir et partager leurs coups de cœur musicaux. Le projet intègre l\'authentification OAuth Spotify, offrant une expérience personnalisée avec affichage du profil utilisateur, exploration d\'artistes et de podcasts.',
     stack: ['React', 'TypeScript', 'Express.js', 'MySQL', 'Spotify API', 'Docker', 'Traefik'],
     image: '/projects/wildify.jpg',
-    githubUrl: 'https://github.com/votre-username/wildify',
-    // TODO: Compresser votre vidéo avec scripts/compress-videos.ps1, puis mettre le chemin ici
-    demoVideo: '/videos/wildify.mp4', // Le script génèrera aussi wildify.webm (chargé automatiquement)
+    githubUrl: 'https://github.com/Raphael77850',
+    demoVideo: '/Wildify_démo.mp4',
     featured: true,
     order: 1,
   },
@@ -39,8 +38,7 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'Material-UI', 'Express.js', 'MySQL', 'Node.js', 'Docker', 'Traefik'],
     image: '/projects/veever.jpg',
     githubUrl: 'https://github.com/Raphael77850/Veever_wild_fixes',
-    // TODO: Compresser votre vidéo avec scripts/compress-videos.ps1
-    demoVideo: '/videos/veever.mp4',
+    demoVideo: '/Veever_démo.mp4',
     featured: true,
     order: 2,
   },
@@ -63,7 +61,7 @@ export const projects: Project[] = [
  * Prépare l'intégration future d'un CMS
  */
 export const getProjects = (): Project[] => {
-  return projects.sort((a, b) => a.order - b.order);
+  return [...projects].sort((a, b) => a.order - b.order);
 };
 
 export const getFeaturedProjects = (): Project[] => {

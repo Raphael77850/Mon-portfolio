@@ -97,6 +97,42 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               </span>
             ))}
           </div>
+
+          <div className="flex md:hidden gap-3 pt-2">
+            <Link
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-accent-blue hover:bg-accent-blue/80 text-primary px-4 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2"
+              aria-label={`Voir le code source de ${project.title}`}
+            >
+              <FaGithub size={18} />
+              <span>Github</span>
+            </Link>
+
+            {project.demoVideo ? (
+              <button
+                type="button"
+                onClick={() => setIsVideoOpen(true)}
+                className="flex-1 bg-accent-green hover:bg-accent-green/80 text-primary px-4 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2"
+                aria-label={`Voir la démo de ${project.title}`}
+              >
+                <FaExternalLinkAlt size={16} />
+                <span>Démo</span>
+              </button>
+            ) : project.demoUrl ? (
+              <Link
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-accent-green hover:bg-accent-green/80 text-primary px-4 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2"
+                aria-label={`Voir la démo de ${project.title}`}
+              >
+                <FaExternalLinkAlt size={16} />
+                <span>Démo</span>
+              </Link>
+            ) : null}
+          </div>
         </div>
       </motion.div>
 

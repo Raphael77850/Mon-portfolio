@@ -12,6 +12,7 @@ export default function ContactForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -23,27 +24,35 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setStatusMessage('');
 
-    // Simuler l'envoi (à remplacer par votre propre logique d'envoi)
     try {
-      // Exemple avec un service comme FormSpree ou votre propre API
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-      // Simulation
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Impossible d\'envoyer le message pour le moment.');
+      }
 
       setSubmitStatus('success');
+      setStatusMessage('Message envoyé avec succès. Je vous répondrai rapidement.');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      console.error('Erreur lors de l\'envoi:', error);
+      const message = error instanceof Error ? error.message : 'Erreur inconnue.';
       setSubmitStatus('error');
+      setStatusMessage(message);
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus('idle'), 5000);
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setStatusMessage('');
+      }, 7000);
     }
   };
 
@@ -130,7 +139,7 @@ export default function ContactForm() {
           animate={{ opacity: 1 }}
           className="text-accent-green text-center font-medium"
         >
-          ✓ Message envoyé avec succès !
+          {statusMessage}
         </motion.p>
       )}
 
@@ -140,7 +149,7 @@ export default function ContactForm() {
           animate={{ opacity: 1 }}
           className="text-red-400 text-center font-medium"
         >
-          ✗ Erreur lors de l&apos;envoi. Veuillez réessayer.
+          {statusMessage}
         </motion.p>
       )}
 

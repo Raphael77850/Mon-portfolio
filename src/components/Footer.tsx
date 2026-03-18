@@ -6,17 +6,17 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaHeart } from 'react-icons/fa';
 const socialLinks = [
   {
     name: 'GitHub',
-    href: 'https://github.com/votre-username',
+    href: 'https://github.com/Raphael77850',
     icon: FaGithub,
   },
   {
     name: 'LinkedIn',
-    href: 'https://linkedin.com/in/votre-profil',
+    href: 'https://www.linkedin.com/in/rapha%C3%ABl-streiff-3019a5309/',
     icon: FaLinkedin,
   },
   {
     name: 'Email',
-    href: 'mailto:votre.email@exemple.com',
+    href: 'mailto:raphael.streiff93@gmail.com',
     icon: FaEnvelope,
   },
 ];
