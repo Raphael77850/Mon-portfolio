@@ -7,7 +7,7 @@ import ProjectCard from '@/components/ProjectCard';
 import SkillCard from '@/components/SkillCard';
 import ContactForm from '@/components/ContactForm';
 import { getProjects } from '@/data/projects';
-import { getSkillsGroupedByCategory, categoryLabels } from '@/data/skills';
+import { getSkillsGroupedByCategory, categoryLabels, skills } from '@/data/skills';
 
 export default function Home() {
   const projects = getProjects();
@@ -163,37 +163,28 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-neutral-light mb-4">
-              Mes <span className="text-gradient">Compétences</span>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-gradient mb-4">
+              Compétences
             </h2>
             <p className="text-neutral text-lg max-w-2xl mx-auto">
-              Technologies et outils que je maîtrise pour donner vie à vos projets.
+              Un ensemble de technologies modernes que je maîtrise et utilise au quotidien
             </p>
           </motion.div>
 
-          <div className="space-y-12">
-            {Object.entries(skillsGrouped).map(([category, skills]) => {
-              if (skills.length === 0) return null;
-              
-              return (
-                <div key={category}>
-                  <motion.h3
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5 }}
-                    viewport={{ once: true }}
-                    className="text-2xl font-heading font-semibold text-neutral-light mb-6"
-                  >
-                    {categoryLabels[category as keyof typeof categoryLabels]}
-                  </motion.h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                    {skills.map((skill, index) => (
-                      <SkillCard key={skill.id} skill={skill} index={index} />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
+          {/* Bento Grid Layout */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {/* Skills principales - GRANDES cartes */}
+            <SkillCard skill={skills[4]} index={0} size="large" /> {/* React */}
+            <SkillCard skill={skills[5]} index={1} size="large" /> {/* Next.js */}
+            
+            {/* Skills importantes - MOYENNES cartes */}
+            <SkillCard skill={skills[3]} index={2} size="medium" /> {/* TypeScript */}
+            <SkillCard skill={skills[6]} index={3} size="medium" /> {/* Tailwind */}
+            
+            {/* Autres skills - PETITES cartes */}
+            {skills.slice(7).map((skill, idx) => (
+              <SkillCard key={skill.id} skill={skill} index={idx + 4} size="small" />
+            ))}
           </div>
         </div>
       </section>

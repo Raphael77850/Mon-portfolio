@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Tilt from 'react-parallax-tilt';
 import * as Icons from 'react-icons/fa';
 import * as SimpleIcons from 'react-icons/si';
 import type { Skill } from '@/data/skills';
@@ -9,15 +10,27 @@ import type { IconBaseProps } from 'react-icons';
 interface SkillCardProps {
   skill: Skill;
   index: number;
+  size?: 'small' | 'medium' | 'large'; // Pour Bento Grid
 }
 
-export default function SkillCard({ skill, index }: SkillCardProps) {
-  // Récupérer dynamiquement l'icône depuis react-icons
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function SkillCard({ skill, index, size = 'small' }: SkillCardProps) {
   const IconComponent = (
     (Icons as Record<string, React.ComponentType<IconBaseProps>>)[skill.icon] ||
     (SimpleIcons as Record<string, React.ComponentType<IconBaseProps>>)[skill.icon]
   ) as React.ComponentType<IconBaseProps> | undefined;
+
+  // Tailles différentes selon l'importance
+  const sizeClasses = {
+    small: 'col-span-1',
+    medium: 'md:col-span-2',
+    large: 'md:col-span-2 md:row-span-2',
+  };
+
+  const iconSizes = {
+    small: 40,
+    medium: 48,
+    large: 64,
+  };
 
   return (
     <motion.div
@@ -25,35 +38,46 @@ export default function SkillCard({ skill, index }: SkillCardProps) {
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
       viewport={{ once: true }}
-      whileHover={{ y: -5 }}
-      className="glass-effect rounded-lg p-6 flex flex-col items-center justify-center space-y-3 hover:border-accent-blue/50 transition-all duration-300"
+      className={sizeClasses[size]}
     >
-      {/* Icône */}
-      {IconComponent && (
-        <div className="text-accent-blue">
-          <IconComponent size={48} />
-        </div>
-      )}
+      <Tilt
+        tiltMaxAngleX={10}
+        tiltMaxAngleY={10}
+        perspective={1000}
+        transitionSpeed={2000}
+        glareEnable={true}
+        glareMaxOpacity={0.2}
+        glareColor="#60A5FA"
+        glarePosition="all"
+        glareBorderRadius="12px"
+        className="h-full"
+      >
+        <div className="glass-effect rounded-lg p-6 h-full flex flex-col items-center justify-center space-y-4 hover:border-accent-blue/50 transition-all duration-300 group relative overflow-hidden">
+          {/* Effet de glow background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-accent-blue/10 to-accent-green/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-      {/* Nom de la compétence */}
-      <h3 className="text-neutral-light font-medium text-center">
-        {skill.name}
-      </h3>
+          {/* Icône */}
+          {IconComponent && (
+            <div className="text-accent-blue relative z-10 transition-transform duration-300 group-hover:scale-110">
+              <IconComponent size={iconSizes[size]} />
+            </div>
+          )}
 
-      {/* Barre de niveau (optionnelle) */}
-      {skill.level && (
-        <div className="w-full">
-          <div className="h-1 bg-secondary-light rounded-full overflow-hidden">
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: `${skill.level}%` }}
-              transition={{ duration: 1, delay: index * 0.05 + 0.3 }}
-              viewport={{ once: true }}
-              className="h-full bg-gradient-to-r from-accent-blue to-accent-green"
-            />
-          </div>
+          {/* Nom de la compétence */}
+          <h3 className={`text-neutral-light font-medium text-center relative z-10 ${
+            size === 'large' ? 'text-xl' : 'text-base'
+          }`}>
+            {skill.name}
+          </h3>
+
+          {/* Badge catégorie (optionnel pour grandes cartes) */}
+          {size === 'large' && (
+            <span className="px-3 py-1 bg-secondary-light rounded-full text-accent-blue text-xs font-medium relative z-10">
+              {skill.category}
+            </span>
+          )}
         </div>
-      )}
+      </Tilt>
     </motion.div>
   );
 }

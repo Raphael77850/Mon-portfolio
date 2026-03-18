@@ -11,8 +11,8 @@ export interface Project {
   stack: string[];
   image: string;
   githubUrl: string;
-  demoUrl?: string;      // Pour les liens externes (La Bringuerie)
-  demoVideo?: string;    // Pour les vidéos locales (Wildify, Veever)
+  demoUrl?: string;      // Pour les liens de démo externe (site déployé)
+  demoVideo?: string;    // Pour les vidéos YouTube/Vimeo (format: URL complète)
   featured: boolean;
   order: number;
 }
@@ -26,7 +26,8 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'Express.js', 'MySQL', 'Spotify API', 'Docker', 'Traefik'],
     image: '/projects/wildify.jpg',
     githubUrl: 'https://github.com/votre-username/wildify',
-    demoVideo: 'Wildify_démo.mp4',
+    // TODO: Compresser votre vidéo avec scripts/compress-videos.ps1, puis mettre le chemin ici
+    demoVideo: '/videos/wildify.mp4', // Le script génèrera aussi wildify.webm (chargé automatiquement)
     featured: true,
     order: 1,
   },
@@ -38,7 +39,8 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'Material-UI', 'Express.js', 'MySQL', 'Node.js', 'Docker', 'Traefik'],
     image: '/projects/veever.jpg',
     githubUrl: 'https://github.com/Raphael77850/Veever_wild_fixes',
-    demoVideo: '/Veever_démo.mp4',
+    // TODO: Compresser votre vidéo avec scripts/compress-videos.ps1
+    demoVideo: '/videos/veever.mp4',
     featured: true,
     order: 2,
   },
