@@ -116,30 +116,6 @@ export const skills: Skill[] = [
     level: 80,
     order: 14,
   },
-  {
-    id: "github",
-    name: "GitHub",
-    category: "tools",
-    icon: "FaGithub",
-    level: 85,
-    order: 15,
-  },
-  {
-    id: "vscode",
-    name: "VS Code",
-    category: "tools",
-    icon: "SiVscodium",
-    level: 90,
-    order: 16,
-  },
-  {
-    id: "cursor",
-    name: "Cursor",
-    category: "tools",
-    icon: "FaICursor",
-    level: 75,
-    order: 17,
-  },
 ];
 
 export const categoryLabels: Record<Skill["category"], string> = {

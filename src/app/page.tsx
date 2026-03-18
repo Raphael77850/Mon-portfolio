@@ -1,16 +1,30 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaArrowDown, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import ContactForm from "@/components/ContactForm";
 import ProjectCard from "@/components/ProjectCard";
 import SkillCard from "@/components/SkillCard";
 import { getProjects } from "@/data/projects";
-import { skills } from "@/data/skills";
+import { getSkills } from "@/data/skills";
 
 export default function Home() {
   const projects = getProjects();
+  const sortedSkills = getSkills();
+  const featuredSkillIds = new Set([
+    "react",
+    "nextjs",
+    "typescript",
+    "tailwind",
+  ]);
+
+  const reactSkill = sortedSkills.find((skill) => skill.id === "react");
+  const nextSkill = sortedSkills.find((skill) => skill.id === "nextjs");
+  const typeScriptSkill = sortedSkills.find(
+    (skill) => skill.id === "typescript",
+  );
+  const tailwindSkill = sortedSkills.find((skill) => skill.id === "tailwind");
+  const otherSkills = sortedSkills.filter(
+    (skill) => !featuredSkillIds.has(skill.id),
+  );
 
   return (
     <main className="min-h-screen">
@@ -29,63 +43,36 @@ export default function Home() {
 
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
+            <div className="animate-fade-in">
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-neutral-light mb-4">
                 Raphaël Streiff
                 <span className="block text-gradient mt-2">
                   Développeur Web Passionné
                 </span>
               </h1>
-            </motion.div>
+            </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-neutral max-w-2xl mx-auto leading-relaxed"
-            >
+            <p className="text-xl md:text-2xl text-neutral max-w-2xl mx-auto leading-relaxed animate-fade-in">
               Je crée des expériences web modernes et intuitives avec un code
               propre et performant.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
-            >
-              <button
-                type="button"
-                onClick={() => {
-                  const element = document.querySelector("#projects");
-                  if (element) element.scrollIntoView({ behavior: "smooth" });
-                }}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 animate-fade-in">
+              <Link
+                href="#projects"
                 className="bg-gradient-to-r from-accent-blue to-accent-green hover:opacity-90 text-primary font-medium px-8 py-4 rounded-lg transition-all duration-300 hover-lift"
               >
                 Voir mes projets
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  const element = document.querySelector("#contact");
-                  if (element) element.scrollIntoView({ behavior: "smooth" });
-                }}
+              </Link>
+              <Link
+                href="#contact"
                 className="glass-effect text-neutral-light font-medium px-8 py-4 rounded-lg transition-all duration-300 hover:border-accent-blue"
               >
                 Me contacter
-              </button>
-            </motion.div>
+              </Link>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex items-center justify-center space-x-6 mt-12"
-            >
+            <div className="flex items-center justify-center space-x-6 mt-12 animate-fade-in">
               <Link
                 href="https://github.com/Raphael77850"
                 target="_blank"
@@ -111,40 +98,25 @@ export default function Home() {
               >
                 <FaEnvelope size={28} />
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <button
-            type="button"
-            onClick={() => {
-              const element = document.querySelector("#projects");
-              if (element) element.scrollIntoView({ behavior: "smooth" });
-            }}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <Link
+            href="#projects"
             className="text-neutral hover:text-accent-blue transition-colors animate-bounce"
             aria-label="Scroll down"
           >
             <FaArrowDown size={24} />
-          </button>
-        </motion.div>
+          </Link>
+        </div>
       </section>
 
       {/* Projects Section */}
       <section id="projects" className="section-padding bg-primary-light">
         <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-neutral-light mb-4">
               Mes <span className="text-gradient">Projets</span>
             </h2>
@@ -152,7 +124,7 @@ export default function Home() {
               Découvrez une sélection de mes réalisations récentes, de la
               conception au déploiement.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
@@ -165,13 +137,7 @@ export default function Home() {
       {/* Skills Section */}
       <section id="skills" className="section-padding">
         <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-gradient mb-4">
               Compétences
             </h2>
@@ -179,21 +145,28 @@ export default function Home() {
               Un ensemble de technologies modernes que je maîtrise et utilise au
               quotidien
             </p>
-          </motion.div>
+          </div>
 
           {/* Bento Grid Layout */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
             {/* Skills principales - GRANDES cartes */}
-            <SkillCard skill={skills[4]} index={0} size="large" /> {/* React */}
-            <SkillCard skill={skills[5]} index={1} size="large" />{" "}
-            {/* Next.js */}
+            {reactSkill && (
+              <SkillCard skill={reactSkill} index={0} size="large" />
+            )}
+            {nextSkill && (
+              <SkillCard skill={nextSkill} index={1} size="large" />
+            )}
+
             {/* Skills importantes - MOYENNES cartes */}
-            <SkillCard skill={skills[3]} index={2} size="medium" />{" "}
-            {/* TypeScript */}
-            <SkillCard skill={skills[6]} index={3} size="medium" />{" "}
-            {/* Tailwind */}
+            {typeScriptSkill && (
+              <SkillCard skill={typeScriptSkill} index={2} size="medium" />
+            )}
+            {tailwindSkill && (
+              <SkillCard skill={tailwindSkill} index={3} size="medium" />
+            )}
+
             {/* Autres skills - PETITES cartes */}
-            {skills.slice(7).map((skill, idx) => (
+            {otherSkills.map((skill, idx) => (
               <SkillCard
                 key={skill.id}
                 skill={skill}
@@ -209,25 +182,13 @@ export default function Home() {
       <section id="about" className="section-padding bg-primary-light">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
+            <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-neutral-light mb-4">
                 À <span className="text-gradient">Propos</span>
               </h2>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="glass-effect rounded-lg p-8 md:p-12 space-y-6"
-            >
+            <div className="glass-effect rounded-lg p-8 md:p-12 space-y-6">
               <p className="text-neutral text-lg leading-relaxed">
                 Bonjour ! Je suis un développeur web junior passionné par la
                 création d&apos;interfaces modernes et intuitives. Diplômé
@@ -252,18 +213,14 @@ export default function Home() {
               </p>
 
               <div className="pt-6">
-                <button
-                  type="button"
-                  onClick={() => {
-                    const element = document.querySelector("#contact");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
+                <Link
+                  href="#contact"
                   className="bg-gradient-to-r from-accent-blue to-accent-green hover:opacity-90 text-primary font-medium px-8 py-4 rounded-lg transition-all duration-300 hover-lift"
                 >
                   Travaillons ensemble
-                </button>
+                </Link>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -271,13 +228,7 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="section-padding">
         <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-neutral-light mb-4">
               Me <span className="text-gradient">Contacter</span>
             </h2>
@@ -285,7 +236,7 @@ export default function Home() {
               Un projet en tête ? Une question ? N&apos;hésitez pas à me
               contacter, je serai ravi d&apos;échanger avec vous.
             </p>
-          </motion.div>
+          </div>
 
           <div className="max-w-2xl mx-auto">
             <ContactForm />
