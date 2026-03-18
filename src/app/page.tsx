@@ -45,7 +45,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="animate-fade-in">
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-neutral-light mb-4">
-                Raphaël Streiff
+                Raphaël
                 <span className="block text-gradient mt-2">
                   Développeur Web Passionné
                 </span>
